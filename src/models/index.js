@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const User = mongoose.model(
-  "User",
+const Users = mongoose.model(
+  "Users",
   new Schema({
     username: { type: String, required: true },
     email: { type: String, required: true },
@@ -11,24 +11,18 @@ const User = mongoose.model(
   })
 );
 
-const Post = mongoose.model(
-  "Post",
+const Posts = mongoose.model(
+  "Posts",
   new Schema({
     title: { type: String, required: true },
     text: { type: String, required: true },
     author: { type: String, required: true },
     dateStamp: { type: Date, required: true },
   })
-  // Virtual for post URL
-  .virtual("url").get(function () {
-  // We don't use an arrow function as we'll need the this object
-  return `/posts/${this._id}`;
-})
-
 );
 
-const Comment = mongoose.model(
-  "Comment",
+const Comments = mongoose.model(
+  "Comments",
   new Schema({
     author: { type: String, required: true },
     text: { type: String, required: true },
@@ -37,7 +31,7 @@ const Comment = mongoose.model(
 );
 
 export default {
-  User,
-  Post,
-  Comment,
+  Users,
+  Posts,
+  Comments,
 };

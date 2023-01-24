@@ -2,6 +2,7 @@ import 'dotenv/config';
 import cors from 'cors';
 import express from 'express';
 import async from 'async';
+import models from './models';
 import routes from './routes';
 // Import the mongoose module
 const mongoose = require('mongoose');
@@ -24,6 +25,15 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Custom Middleware
+
+app.use((req, res, next) => {
+  req.context = {
+    models,
+  };
+  next();
+});
+
 // Set `strictQuery: false` to globally opt into filtering by properties that aren't in the schema
 // Included because it removes preparatory warnings for Mongoose 7.
 // See: https://mongoosejs.com/docs/migrating_to_6.html#strictquery-is-removed-and-replaced-by-strict
@@ -40,13 +50,10 @@ async function main() {
 // * Routes * //
 
 app.use('/', routes.posts);
-app.use('/posts', routes.posts);
-// app.use('/users', routes.user);
+app.use('/api/posts', routes.api);
 
 // * Start * //
 
 app.listen(process.env.PORT, () =>
   console.log(`Example app listening on port ${process.env.PORT}!`),
 );
-
-module.exports = app;
