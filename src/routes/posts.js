@@ -1,7 +1,7 @@
 import { Router } from 'express';
-const router = Router();
 const post_controller = require('../controllers/postController');
 
+const router = Router();
 /// ROUTES ///
 
 // GET home page.
