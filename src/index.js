@@ -2,7 +2,6 @@ import 'dotenv/config';
 import cors from 'cors';
 import express from 'express';
 import async from 'async';
-import models from './models';
 import routes from './routes';
 // Import the mongoose module
 const mongoose = require('mongoose');
@@ -27,12 +26,12 @@ app.use(express.urlencoded({ extended: true }));
 
 // Custom Middleware
 
-app.use((req, res, next) => {
-  req.context = {
-    models,
-  };
-  next();
-});
+// app.use((req, res, next) => {
+//   req.context = {
+//     models,
+//   };
+//   next();
+// });
 
 // Set `strictQuery: false` to globally opt into filtering by properties that aren't in the schema
 // Included because it removes preparatory warnings for Mongoose 7.
@@ -50,7 +49,7 @@ async function main() {
 // * Routes * //
 
 app.use('/', routes.posts);
-app.use('/api/posts', routes.api);
+app.use('/api', routes.api);
 
 // * Start * //
 

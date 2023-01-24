@@ -1,38 +1,64 @@
-import { v4 as uuidv4 } from 'uuid';
 import { Router } from 'express';
+const Post = require('../models/post');
 
 const router = Router();
 
-router.get('/', (req, res) => {
-  return res.send(Object.values(req.context.models.messages));
+// Get all posts
+router.get('/posts', async (req, res) => {
+  const posts = await Post.find();
+  return res.send(posts);
 });
 
-router.get('/:messageId', (req, res) => {
-  return res.send(req.context.models.messages[req.params.messageId]);
+// Get individual post
+router.get('/posts/:id', async (req, res) => {
+  try {
+    const post = await Post.findOne({ _id: req.params.id });
+    return res.send(post);
+  } catch {
+    res.status(404);
+    res.send({ error: "Post doesn't exist!" });
+  }
 });
 
-router.post('/', (req, res) => {
-  const id = uuidv4();
-  const message = {
-    id,
+// Create post
+router.post('/posts', async (req, res) => {
+  const post = new Post({
+    title: req.body.title,
     text: req.body.text,
-    userId: req.context.me.id,
-  };
-
-  req.context.models.messages[id] = message;
-
-  return res.send(message);
+    author: req.body.author,
+    dateStamp: new Date(),
+  })
+  await post.save()
+  return res.send(post);
 });
 
-router.delete('/:messageId', (req, res) => {
-  const {
-    [req.params.messageId]: message,
-    ...otherMessages
-  } = req.context.models.messages;
+// Update post
+router.put('/posts/:id', async (req, res) => {
+  try {
+    const post = await Post.findByIdAndUpdate(req.params.id, {
+      title: req.body.title,
+      text: req.body.text,
+      author: req.body.author,
+      dateStamp: new Date(),
+    });
 
-  req.context.models.messages = otherMessages;
+    await post.save();
+    return res.send(post);
+  } catch {
+    res.status(404);
+    res.send({ error: "Post doesn't exist!" });
+  }
+});
 
-  return res.send(message);
+// Delete post
+router.delete('/posts/:id', async (req, res) => {
+  try {
+    const post = await Post.findByIdAndRemove(req.params.id);
+    return res.send(post);
+  } catch {
+    res.status(404);
+    res.send({ error: "Post doesn't exist!" });
+  }
 });
 
 export default router;
