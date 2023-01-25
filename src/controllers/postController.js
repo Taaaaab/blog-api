@@ -7,6 +7,12 @@ exports.index = (req, res) => {
     });
 };
 
+exports.post_detail_page = (req, res) => {
+  return res.render("post_detail", {
+    postId: req.params.id,
+  })
+}
+
 exports.post_list_get = async (req, res) => {
     const posts = await Post.find();
     return res.send(posts);

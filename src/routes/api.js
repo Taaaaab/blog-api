@@ -1,6 +1,7 @@
 import { Router } from 'express';
 const post_controller = require('../controllers/postController');
 const comment_controller = require('../controllers/commentController');
+const user_controller = require('../controllers/userController');
 
 const router = Router();
 
@@ -35,5 +36,19 @@ router.put('/comments/:id', comment_controller.comment_update_put);
 
 // Delete comment
 router.delete('/comments/:id', comment_controller.comment_delete);
+
+// * USERS * //
+
+// Get list of users
+router.get('/users', user_controller.user_list_get);
+
+// Get details of single user
+router.get('/users/:id', user_controller.user_detail_get);
+
+// Create single user
+router.post('/users', user_controller.user_create_post);
+
+// Delete single user
+router.delete('/users/:id', user_controller.user_delete);
 
 export default router;

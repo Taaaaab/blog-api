@@ -12,6 +12,7 @@ const app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.use(express.static('public'));
 
 // * Application-Level Middleware * //
 
@@ -49,6 +50,7 @@ async function main() {
 // * Routes * //
 
 app.use('/', routes.posts);
+app.use('/posts', routes.posts);
 app.use('/api', routes.api);
 
 // * Start * //

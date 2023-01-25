@@ -15,36 +15,28 @@
         <header>
             <h2>blog</h2>
         </header>
-        <div class="welcome-box">
-            <h1>Welcome to the blog</h1>
-            <p>Check out the content below</p>
-        </div>
-        <div class="grid-container">
-        
+        <div class="post-container">
+            
         </div>
     </div>
     <script>
-        fetch('http://localhost:3000/api/posts', {mode: 'cors'})
+        let postId = "<%= postId %>";
+        fetch(`http://localhost:3000/api/posts/${postId}`, {mode: 'cors'})
     .then(function(response) {
       return response.json();
     })
     .then(data => {
         console.log(data);
-      data.forEach(post => {
-        const date = post.dateStamp;
+      
+        const date = data.dateStamp;
         const dateFormatted = new Date(date).toLocaleString();
-        const markup = `<div class="card" style="width: 18rem;">
-            <div class="card-body">
-                <h5 class="card-title">${post.title}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">${post.author}&nbsp;${dateFormatted}</h6>
-                <p class="card-text">${post.text}</p>
-                <a href="posts/${post._id}">
-                    <button type="button" class="btn btn-secondary">View post</button>
-                </a>
-            </div>
+        const markup = `<div class="container">
+                <h2 class="card-title">${data.title}</h2>
+                <h6 class="card-subtitle mb-2 text-muted">${data.author}&nbsp;${dateFormatted}</h6>
+                <p class="card-text-p">${data.text}</p>
+                <p class="comments">Comments:</p>
             </div>`;
-        document.querySelector('.grid-container').insertAdjacentHTML('beforeend', markup);
-      })
+        document.querySelector('.post-container').insertAdjacentHTML('beforeend', markup);
       
     });
     </script>
