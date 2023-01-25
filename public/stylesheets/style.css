@@ -83,3 +83,12 @@ h1 {
     display: flex;
     justify-content: space-between;
 }
+
+form {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.home {
+    color: inherit;
+}

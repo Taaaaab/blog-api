@@ -34,7 +34,7 @@ exports.comment_create_post = async (req, res) => {
       dateStamp: new Date(),
     })
     await comment.save();
-    return res.send(comment);
+    return res.redirect(`/posts/${req.params.id}`);
 };
 
 // Update individual comment
