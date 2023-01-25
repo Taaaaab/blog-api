@@ -6,6 +6,12 @@ const PostSchema = new Schema({
     text: { type: String, required: true },
     author: { type: String, required: true },
     dateStamp: { type: Date, required: true },
-})
+});
+
+// Virtual for book's URL
+PostSchema.virtual("url").get(function () {
+    // We don't use an arrow function as we'll need the this object
+    return `/posts/${this._id}`;
+});
 
 module.exports = mongoose.model("Post", PostSchema);
