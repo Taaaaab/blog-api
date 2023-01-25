@@ -18,6 +18,9 @@
         <div class="post-container">
             
         </div>
+        <div class="comment-container">
+
+        </div>
     </div>
     <script>
         let postId = "<%= postId %>";
@@ -26,8 +29,6 @@
       return response.json();
     })
     .then(data => {
-        console.log(data);
-      
         const date = data.dateStamp;
         const dateFormatted = new Date(date).toLocaleString();
         const markup = `<div class="container">
@@ -38,6 +39,31 @@
             </div>`;
         document.querySelector('.post-container').insertAdjacentHTML('beforeend', markup);
       
+    });
+    </script>
+    <script>
+        let Id = "<%= postId %>";
+        fetch(`http://localhost:3000/api/comments/${Id}`, {mode: 'cors'})
+    .then(function(response) {
+      return response.json();
+    })
+    .then(comments => {
+        comments.forEach(comment => {
+            const commentDate = comment.dateStamp;
+            const commentFormatted = new Date(commentDate).toLocaleString();
+            // Display comments
+            const commentMarkup = `<div class="card" style="width: 50rem;">
+                    <div class="card-body">
+                        <div class="comment-header">
+                            <h5 class="card-title">${comment.author}</h5>
+                            <span>${commentFormatted}</span>
+                        </div>
+                        <p>${comment.text}</p>
+                    </div>    
+                </div>`;
+        document.querySelector('.comment-container').insertAdjacentHTML('beforeend', commentMarkup);
+        })
+        
     });
     </script>
 </body>
