@@ -3,6 +3,8 @@ import cors from 'cors';
 import express from 'express';
 import async from 'async';
 import routes from './routes';
+const compression = require("compression");
+const helmet = require("helmet");
 // Import the mongoose module
 const mongoose = require('mongoose');
 var path = require('path');
@@ -19,20 +21,13 @@ app.use(express.static('public'));
 // Third-Party Middleware
 
 app.use(cors());
+app.use(compression()); // Compress all routes
+app.use(helmet()); // Compress all routes
 
 // Built-In Middleware
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// Custom Middleware
-
-// app.use((req, res, next) => {
-//   req.context = {
-//     models,
-//   };
-//   next();
-// });
 
 // Set `strictQuery: false` to globally opt into filtering by properties that aren't in the schema
 // Included because it removes preparatory warnings for Mongoose 7.
