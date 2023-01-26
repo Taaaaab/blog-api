@@ -35,7 +35,7 @@
             <button class="btn btn-primary" type="submit">Add Comment</button>
         </form>
     </div>
-    <script>
+    <script integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
         let postId = "<%= postId %>";
         fetch(`http://localhost:3000/api/posts/${postId}`, {mode: 'cors'})
     .then(function(response) {
@@ -54,7 +54,7 @@
       
     });
     </script>
-    <script>
+    <script integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
         let Id = "<%= postId %>";
         fetch(`http://localhost:3000/api/comments/${Id}`, {mode: 'cors'})
     .then(function(response) {
