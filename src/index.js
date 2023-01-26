@@ -4,7 +4,6 @@ import express from 'express';
 import async from 'async';
 import routes from './routes';
 const compression = require("compression");
-const helmet = require("helmet");
 // Import the mongoose module
 const mongoose = require('mongoose');
 var path = require('path');
@@ -22,7 +21,6 @@ app.use(express.static('public'));
 
 app.use(cors());
 app.use(compression()); // Compress all routes
-app.use(helmet()); // Compress all routes
 
 // Built-In Middleware
 
