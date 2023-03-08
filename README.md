@@ -1,6 +1,5 @@
 # blog-api
 
-==========
 Blog created using Express and MongoDB (with Mongoose). Project to practice using an API only backend to create, read, update and delete blog posts and comments (saved using Mongoose schema to MongoDB Atlas). Homepage with script to fetch and display blog posts and comments. Bootstrap used for CSS styling of cards.
 
 API to fetch posts (on localhost port 3000):
