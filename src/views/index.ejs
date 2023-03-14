@@ -1,41 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="content-type" content="text/html; charset=utf-8 ;">
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://code.jquery.com/jquery-3.5.1.slim.min.js https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js 'unsafe-inline' 'unsafe-eval'; style-src 'self' https://blog-api-production-33c8.up.railway.app/">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8 ;" />
     <title>Blog</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"></script>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
     <div class="container-custom">
-        <header>
-            <h2>blog</h2>
-        </header>
-        <div class="welcome-box">
-            <h1>Welcome to the blog</h1>
-            <p>Check out the content below</p>
-        </div>
-        <div class="grid-container">
-        
-        </div>
+      <header>
+        <h2>blog</h2>
+      </header>
+      <div class="welcome-box">
+        <h1>Welcome to the blog</h1>
+        <p>Check out the content below</p>
+      </div>
+      <div class="grid-container"></div>
     </div>
-    <script>
-        fetch('http://localhost:3000/api/posts', {mode: 'cors'})
-    .then(function(response) {
-      return response.json();
-    })
-    .then(data => {
-        console.log(data);
-      data.forEach(post => {
-        const date = post.dateStamp;
-        const dateFormatted = new Date(date).toLocaleString();
-        const markup = `<div class="card" style="width: 18rem;">
+    <script
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    >
+      fetch("/api/posts", { mode: "cors" })
+        .then(function (response) {
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data);
+          data.forEach((post) => {
+            const date = post.dateStamp;
+            const dateFormatted = new Date(date).toLocaleString();
+            const markup = `<div class="card" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title">${post.title}</h5>
                 <h6 class="card-subtitle mb-2 text-muted">${post.author}&nbsp;${dateFormatted}</h6>
@@ -45,10 +58,11 @@
                 </a>
             </div>
             </div>`;
-        document.querySelector('.grid-container').insertAdjacentHTML('beforeend', markup);
-      })
-      
-    });
+            document
+              .querySelector(".grid-container")
+              .insertAdjacentHTML("beforeend", markup);
+          });
+        });
     </script>
-</body>
+  </body>
 </html>
