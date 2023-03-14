@@ -2,7 +2,7 @@ import "dotenv/config";
 import cors from "cors";
 import express from "express";
 import async from "async";
-import routes from "./routes";
+import routes from "./src/routes";
 const compression = require("compression");
 // Import the mongoose module
 const mongoose = require("mongoose");
