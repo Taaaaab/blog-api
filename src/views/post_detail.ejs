@@ -1,69 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="content-type" content="text/html; charset=utf-8 ;">
-    <meta http-equiv="Content-Security-Policy" content="script-src 'self' https://code.jquery.com/jquery-3.5.1.slim.min.js https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js 'unsafe-inline' 'unsafe-eval'; style-src 'self' https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="content-type" content="text/html; charset=utf-8 ;" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' https://code.jquery.com/jquery-3.5.1.slim.min.js https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js 'unsafe-inline' 'unsafe-eval'; style-src 'self' https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
     <title>Blog</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous"></script>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+  </head>
+  <body>
     <header>
-        <a class="home" href="/">
-            <h2>blog</h2>
-        </a>
+      <a class="home" href="/">
+        <h2>blog</h2>
+      </a>
     </header>
     <div class="container">
-        <div class="post-container">
-            
+      <div class="post-container"></div>
+      <div class="comment-container"></div>
+      <form action="/api/comments/<%= postId %>" method="POST">
+        <div class="form-group">
+          <label class="form-label" for="author">Name:</label>
+          <input class="form-control" name="author" type="text" required />
         </div>
-        <div class="comment-container">
-
+        <div class="form-group">
+          <label class="form-label" for="text">Comment:</label>
+          <input class="form-control" name="text" type="text" required />
         </div>
-        <form action="/api/comments/<%= postId %>" method="POST">
-            <div class="form-group">
-                <label class="form-label" for="author">Name:</label>
-                <input class="form-control" name="author" type="text" required />
-            </div>
-            <div class="form-group">
-                <label class="form-label" for="text">Comment:</label>
-                <input class="form-control" name="text" type="text" required />
-            </div>
-            <button class="btn btn-primary" type="submit">Add Comment</button>
-        </form>
+        <button class="btn btn-primary" type="submit">Add Comment</button>
+      </form>
     </div>
-    <script>
-        let postId = "<%= postId %>";
-        fetch(`http://localhost:3000/api/posts/${postId}`, {mode: 'cors'})
-    .then(function(response) {
-      return response.json();
-    })
-    .then(data => {
-        const date = data.dateStamp;
-        const dateFormatted = new Date(date).toLocaleString();
-        const markup = `<div class="container">
+    <script
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    >
+      let postId = "<%= postId %>";
+      fetch(`/api/posts/${postId}`, { mode: "cors" })
+        .then(function (response) {
+          return response.json();
+        })
+        .then((data) => {
+          const date = data.dateStamp;
+          const dateFormatted = new Date(date).toLocaleString();
+          const markup = `<div class="container">
                 <h2 class="card-title">${data.title}</h2>
                 <h6 class="card-subtitle mb-2 text-muted">${data.author}&nbsp;${dateFormatted}</h6>
                 <p class="card-text-p">${data.text}</p>
                 <p class="comments">Comments:</p>
             </div>`;
-        document.querySelector('.post-container').insertAdjacentHTML('beforeend', markup);
-      
-    });
+          document
+            .querySelector(".post-container")
+            .insertAdjacentHTML("beforeend", markup);
+        });
     </script>
-    <script>
-        let Id = "<%= postId %>";
-        fetch(`http://localhost:3000/api/comments/${Id}`, {mode: 'cors'})
-    .then(function(response) {
-      return response.json();
-    })
-    .then(comments => {
-        comments.forEach(comment => {
+    <script
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    >
+      let Id = "<%= postId %>";
+      fetch(`/api/comments/${Id}`, { mode: "cors" })
+        .then(function (response) {
+          return response.json();
+        })
+        .then((comments) => {
+          comments.forEach((comment) => {
             const commentDate = comment.dateStamp;
             const commentFormatted = new Date(commentDate).toLocaleString();
             // Display comments
@@ -76,10 +95,11 @@
                         <p>${comment.text}</p>
                     </div>    
                 </div>`;
-        document.querySelector('.comment-container').insertAdjacentHTML('beforeend', commentMarkup);
-        })
-        
-    });
+            document
+              .querySelector(".comment-container")
+              .insertAdjacentHTML("beforeend", commentMarkup);
+          });
+        });
     </script>
-</body>
+  </body>
 </html>
