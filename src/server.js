@@ -1,12 +1,12 @@
-import "dotenv/config";
-import cors from "cors";
-import express from "express";
-import async from "async";
-import routes from "./src/routes";
+const express = require("express");
+require("dotenv").config();
+const cors = require("cors");
+const postRouter = require("./routes/posts");
+const apiRouter = require("./routes/api");
+var path = require("path");
 const compression = require("compression");
 // Import the mongoose module
 const mongoose = require("mongoose");
-var path = require("path");
 
 const app = express();
 
@@ -42,9 +42,9 @@ async function main() {
 
 // * Routes * //
 
-app.use("/", routes.posts);
-app.use("/posts", routes.posts);
-app.use("/api", routes.api);
+app.use("/", postRouter);
+app.use("/posts", postRouter);
+app.use("/api", apiRouter);
 
 // * Start * //
 

@@ -4,10 +4,10 @@
   "engines": {
     "node": ">=18.13.0"
   },
-  "description": "",
+  "description": "Blog created using Express/Node and MongoDB (with Mongoose). Project to practice using an API only backend to create, read, update and delete blog posts and comments (saved using Mongoose schema to MongoDB Atlas). Homepage with script to fetch and display blog posts and comments. Bootstrap used for CSS styling of cards.",
   "main": "index.js",
   "scripts": {
-    "start": "node --exec babel-node index.js",
+    "devStart": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,7 +22,8 @@
   },
   "homepage": "https://github.com/Taaaaab/blog-api#readme",
   "devDependencies": {
-    "@babel/core": "^7.20.12",
+    "@babel/cli": "^7.21.0",
+    "@babel/core": "^7.21.3",
     "@babel/node": "^7.20.7",
     "@babel/preset-env": "^7.20.2",
     "nodemon": "^2.0.20"

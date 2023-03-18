@@ -1,12 +1,10 @@
-import { Router } from 'express';
-const post_controller = require('../controllers/postController');
-
-const router = Router();
-/// ROUTES ///
+const express = require("express");
+const router = express.Router();
+const post_controller = require("../controllers/postController");
 
 // GET home page.
-router.get('/', post_controller.index);
+router.get("/", post_controller.index);
 
-router.get('/:id', post_controller.post_detail_page)
+router.get("/:id", post_controller.post_detail_page);
 
-export default router;
+module.exports = router;
