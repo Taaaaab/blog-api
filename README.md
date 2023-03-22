@@ -2,12 +2,32 @@
 
 Blog created using Express and MongoDB (with Mongoose). Project to practice using an API only backend to create, read, update and delete blog posts and comments (saved using Mongoose schema to MongoDB Atlas). Homepage with script to fetch and display blog posts and comments. Bootstrap used for CSS styling of cards.
 
+![Alt text](https://github.com/Taaaaab/personal-portfolio/blob/main/photos/blog.png?raw=true "Screenshot")
+
+## Built With
+
+- Express/Node
+- EJS Template Engine
+- MongoDB w/Mongoose
+- CSS w/Bootstrap
+
 ## Deployed site on Render
 
 https://blog-api-jrk0.onrender.com/
 
-## License
+## Getting Started
 
-The project is licensed under the ISC license.
+In order to setup and work on this project on your own, you will need to:
 
-![Alt text](https://github.com/Taaaaab/personal-portfolio/blob/main/photos/blog.png?raw=true "Screenshot")
+1. Clone this project:
+   `https://github.com/Taaaaab/blog-api.git`
+
+2. Once you have cloned this project, you can install the required dependencies by using:
+   `npm install`
+
+3. A live demo of the project can be started by using:  
+   `npm run devStart`
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome!
