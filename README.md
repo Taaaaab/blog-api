@@ -1,6 +1,7 @@
 # blog-api
 
-Blog created using Express and MongoDB (with Mongoose). Project to practice using an API only backend to create, read, update and delete blog posts and comments (saved using Mongoose schema to MongoDB Atlas). Homepage with script to fetch and display blog posts and comments. Bootstrap used for CSS styling of cards.
+This project was completed for The Odin Project Blog API Assignment. The goal of the project was to create a blog using Express and MongoDB (with Mongoose).
+Additionally, to practice using an API only backend to create, read, update and delete blog posts and comments (saved using Mongoose schema to MongoDB Atlas). Homepage with script to fetch and display blog posts and comments. Bootstrap used for CSS styling of cards.
 
 ![Alt text](https://github.com/Taaaaab/personal-portfolio/blob/main/photos/blog.png?raw=true "Screenshot")
 
